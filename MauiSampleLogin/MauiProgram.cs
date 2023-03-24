@@ -18,8 +18,10 @@ public static class MauiProgram
 
         builder.Services.AddScoped<ILoginService, LoginService>();
 
-        builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<CreateAccountViewModel>();
+        builder.Services.AddSingleton<CreateAccountPage>();
 
+        builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddSingleton<MainPage>();
 
         return builder.Build();

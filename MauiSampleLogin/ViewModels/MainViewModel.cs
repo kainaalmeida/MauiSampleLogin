@@ -30,4 +30,10 @@ public partial class MainViewModel
         {
         }
     }
+
+    [RelayCommand]
+    public async Task CreateAccount()
+    {
+        await Shell.Current.GoToAsync(nameof(CreateAccountPage));
+    }
 }

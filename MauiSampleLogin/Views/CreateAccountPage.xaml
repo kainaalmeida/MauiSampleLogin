@@ -4,13 +4,16 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:MauiSampleLogin.ViewModels"
-    Title="CreateAccountPage"
+    Title="Create Account"
     x:DataType="vm:CreateAccountViewModel"
     BackgroundColor="#00793D">
     <Grid RowDefinitions="*,*">
         <Image HeightRequest="150" Source="logo.png" />
 
-        <Border Grid.Row="1" BackgroundColor="White">
+        <Border
+            Grid.Row="1"
+            Margin="0,0,0,-2"
+            BackgroundColor="White">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="20,20,0,0" />
             </Border.StrokeShape>

@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiSampleLogin"
-    xmlns:views="clr-namespace:MauiSampleLogin.Views">
+    xmlns:views="clr-namespace:MauiSampleLogin.Views"
+    BackgroundColor="#00793D">
     <ShellContent
         Title="Main"
         ContentTemplate="{DataTemplate views:MainPage}"

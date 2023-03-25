@@ -1,4 +1,6 @@
-﻿using MauiSampleLogin.Models.CreateAccount;
+﻿using CommunityToolkit.Maui.Alerts;
+using MauiSampleLogin.Contracts.CreateAccount;
+using MauiSampleLogin.Models.CreateAccount;
 using MauiSampleLogin.Services;
 
 namespace MauiSampleLogin.ViewModels
@@ -24,17 +26,32 @@ namespace MauiSampleLogin.ViewModels
         [RelayCommand]
         public async Task Save()
         {
-            var request = new CreateAccountRequest
+            if (Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet)
             {
-                Name = name,
-                Email = email,
-                Password = password,
-            };
+                var request = new CreateAccountRequest
+                {
+                    Name = name,
+                    Email = email,
+                    Password = password,
+                };
 
-            var result = await _loginService.CreateAccount(request);
+                var validator = new CreateAccountContract(request);
+                if (!validator.IsValid)
+                {
+                    await Toast.Make("Dados inválidos", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
+                    return;
+                }
 
-            if (result)
-                await Shell.Current.GoToAsync("..");
+                var result = await _loginService.CreateAccount(request);
+
+                if (result)
+                {
+                    await Toast.Make("Usuário cadastrado com sucesso", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
+                    await Shell.Current.GoToAsync("..");
+                }
+            }
+            else
+                await Toast.Make("Sem conexão com a internet", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
         }
     }
 }

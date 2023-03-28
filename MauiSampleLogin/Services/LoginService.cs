@@ -3,6 +3,7 @@ using Flurl.Http;
 using MauiSampleLogin.Helper;
 using MauiSampleLogin.Models;
 using MauiSampleLogin.Models.CreateAccount;
+using Newtonsoft.Json;
 
 namespace MauiSampleLogin.Services
 {
@@ -25,9 +26,25 @@ namespace MauiSampleLogin.Services
             return false;
         }
 
-        public Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
+        public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await Constants.BASE_URL
+                    .AppendPathSegment("/auth")
+                    .PostJsonAsync(loginRequest);
+
+                if (response.ResponseMessage.IsSuccessStatusCode)
+                {
+                    var content = await response.ResponseMessage.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<LoginResponse>(content);
+                }
+            }
+            catch (FlurlHttpException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return new LoginResponse();
         }
     }
 }

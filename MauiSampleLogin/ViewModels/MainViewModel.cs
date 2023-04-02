@@ -53,7 +53,7 @@ public partial class MainViewModel
         await SecureStorage.SetAsync("token", result.Access_Token);
         await SecureStorage.SetAsync("refreshToken", result.Refresh_Token);
 
-        await Shell.Current.GoToAsync($"//{nameof(ProductsPage)}");
+        await Shell.Current.GoToAsync($"//{nameof(RestaurantsPage)}");
 
     }
 

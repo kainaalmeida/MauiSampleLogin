@@ -1,4 +1,5 @@
 ﻿using MauiSampleLogin.Services;
+using MauiSampleLogin.Services.Restaurants;
 
 namespace MauiSampleLogin;
 
@@ -25,6 +26,10 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddSingleton<MainPage>();
+
+        builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+        builder.Services.AddSingleton<RestaurantsViewModel>();
+        builder.Services.AddSingleton<RestaurantsPage>();
 
         return builder.Build();
     }

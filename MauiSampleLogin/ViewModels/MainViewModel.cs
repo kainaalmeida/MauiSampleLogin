@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using MauiSampleLogin.Contracts.Login;
 using MauiSampleLogin.Services;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks.Dataflow;
 
 namespace MauiSampleLogin.ViewModels;
 
@@ -38,7 +41,13 @@ public partial class MainViewModel
         var validator = new LoginContract(loginRequest);
         if (!validator.IsValid)
         {
-            await Toast.Make("Dados são inválidos", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
+            var messages = validator.Notifications.Select(x => x.Message);
+            var sb = new StringBuilder();
+
+            foreach (var message in messages)
+                sb.Append($"{message}\n");
+
+            await Shell.Current.DisplayAlert("Atenção",sb.ToString(),"OK");
             return;
         }
 
@@ -50,8 +59,8 @@ public partial class MainViewModel
             return;
         }
 
-        await SecureStorage.SetAsync("token", result.Access_Token);
-        await SecureStorage.SetAsync("refreshToken", result.Refresh_Token);
+        Preferences.Default.Set("token", result.Access_Token);
+        Preferences.Default.Set("refreshToken", result.Refresh_Token);
 
         await Shell.Current.GoToAsync($"//{nameof(RestaurantsPage)}");
 

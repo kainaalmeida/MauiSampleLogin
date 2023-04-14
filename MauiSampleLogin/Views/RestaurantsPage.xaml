@@ -24,7 +24,6 @@
 
                         <Grid
                             Padding="20"
-                            ColumnDefinitions="auto,auto"
                             RowDefinitions="auto,auto,auto"
                             RowSpacing="10">
                             <Label
@@ -38,8 +37,7 @@
 
                             <aloha:Rating
                                 Grid.Row="2"
-                                Grid.ColumnSpan="2"
-                                HorizontalOptions="CenterAndExpand"
+                                HorizontalOptions="Center"
                                 IsReadOnly="True"
                                 Value="{Binding rating}" />
 

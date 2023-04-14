@@ -1,6 +1,5 @@
 ﻿using MauiSampleLogin.Models.Restaurant;
 using MauiSampleLogin.Services.Restaurants;
-using System.Runtime.InteropServices;
 
 namespace MauiSampleLogin.ViewModels
 {
@@ -18,7 +17,7 @@ namespace MauiSampleLogin.ViewModels
         public async Task InitAsync()
         {
             var result = await _service
-                .GetAllAsync(await SecureStorage.GetAsync("token"));
+                .GetAllAsync(Preferences.Default.Get("token", string.Empty));
 
             if (result is null)
                 return;

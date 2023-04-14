@@ -2,6 +2,7 @@
 using MauiSampleLogin.Contracts.CreateAccount;
 using MauiSampleLogin.Models.CreateAccount;
 using MauiSampleLogin.Services;
+using System.Text;
 
 namespace MauiSampleLogin.ViewModels
 {
@@ -38,7 +39,18 @@ namespace MauiSampleLogin.ViewModels
                 var validator = new CreateAccountContract(request);
                 if (!validator.IsValid)
                 {
-                    await Toast.Make("Dados inválidos", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
+
+                    var messages =
+                        validator
+                        .Notifications
+                        .Select(x => x.Message);
+
+                    var sb = new StringBuilder();
+                    foreach (var message in messages)
+                        sb.Append($"{message}\n");
+
+                    await Shell.Current.DisplayAlert("Atenção",sb.ToString(),"OK");
+
                     return;
                 }
 

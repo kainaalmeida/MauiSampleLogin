@@ -65,6 +65,13 @@
 
                 <Button
                     BackgroundColor="White"
+                    Command="{Binding ValidateBiometricCommand}"
+                    FontSize="Medium"
+                    Text="Biometric"
+                    TextColor="#D95716" />
+
+                <Button
+                    BackgroundColor="White"
                     Command="{Binding CreateAccountCommand}"
                     FontSize="Medium"
                     Text="Create Account"

@@ -13,12 +13,12 @@ public partial class App : Application
         MainPage = new AppShell();
     }
 
-    protected override async void OnStart()
-    {
+    //protected override async void OnStart()
+    //{
 
-        if (!string.IsNullOrEmpty(Preferences.Default.Get("token", string.Empty)))
-            await Shell.Current.GoToAsync($"//{nameof(RestaurantsPage)}");
+    //    if (!string.IsNullOrEmpty(Preferences.Default.Get("token", string.Empty)))
+    //        await Shell.Current.GoToAsync($"//{nameof(RestaurantsPage)}");
 
-        base.OnStart();
-    }
+    //    base.OnStart();
+    //}
 }

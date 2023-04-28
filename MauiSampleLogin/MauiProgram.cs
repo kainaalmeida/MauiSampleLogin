@@ -1,5 +1,7 @@
 ﻿using MauiSampleLogin.Services;
 using MauiSampleLogin.Services.Restaurants;
+using Plugin.Fingerprint.Abstractions;
+using Plugin.Fingerprint;
 
 namespace MauiSampleLogin;
 
@@ -30,6 +32,8 @@ public static class MauiProgram
         builder.Services.AddScoped<IRestaurantService, RestaurantService>();
         builder.Services.AddSingleton<RestaurantsViewModel>();
         builder.Services.AddSingleton<RestaurantsPage>();
+
+        builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
 
         return builder.Build();
     }

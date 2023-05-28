@@ -59,6 +59,7 @@
 	  <PackageReference Include="MonkeyCache" Version="2.0.1" />
 	  <PackageReference Include="MonkeyCache.LiteDB" Version="2.0.1" />
 	  <PackageReference Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
+	  <PackageReference Include="Sentry.Maui" Version="3.33.0" />
 	  <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
 	</ItemGroup>
 

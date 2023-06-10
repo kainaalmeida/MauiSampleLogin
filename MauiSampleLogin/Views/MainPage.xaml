@@ -3,6 +3,10 @@
     x:Class="MauiSampleLogin.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+    xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+    xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+    xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
     xmlns:vm="clr-namespace:MauiSampleLogin.ViewModels"
     x:DataType="vm:MainViewModel"
     BackgroundColor="#00793D">
@@ -20,48 +24,66 @@
 
             <VerticalStackLayout
                 Padding="20"
-                Spacing="20"
+                Spacing="30"
                 VerticalOptions="Center">
-                <Entry
-                    FontSize="Medium"
-                    Keyboard="Email"
-                    Placeholder="E-mail"
-                    PlaceholderColor="Black"
-                    Text="{Binding Email}" />
-                <Entry
-                    FontSize="Medium"
-                    IsPassword="True"
-                    Placeholder="Password"
-                    PlaceholderColor="Black"
-                    Text="{Binding Password}" />
 
-                <Grid Margin="0,15,0,0">
+                <input:FormView>
+                    <material:TextField
+                        Title="E-mail"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                               Glyph={x:Static m:MaterialRegular.Email}}"
+                        Text="{Binding Email}">
+                        <validation:RequiredValidation Message="E-mail é obrigatório" />
+                        <validation:RegexValidation Message="Endereço de e-mail inválido" Pattern="{x:Static input:AdvancedEntry.REGEX_EMAIL}" />
+                    </material:TextField>
 
-                    <Button
-                        BackgroundColor="#D95716"
-                        Command="{Binding LoginCommand}"
-                        CornerRadius="20"
-                        FontAttributes="Bold"
-                        FontSize="Medium"
-                        Text="LOGIN">
-                        <Button.Triggers>
-                            <DataTrigger
-                                Binding="{Binding LoginCommand.IsRunning}"
-                                TargetType="Button"
-                                Value="True">
-                                <Setter Property="Text" Value="" />
-                            </DataTrigger>
-                        </Button.Triggers>
-                    </Button>
+                    <material:TextField
+                        Title="Password"
+                        AccentColor="Black"
+                        AllowClear="True"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                                               Glyph={x:Static m:MaterialRegular.Key}}"
+                        IsPassword="True"
+                        Text="{Binding Password}">
+                        <validation:RequiredValidation Message="Senha é obrigatório" />
+                        <material:TextField.Attachments>
+                            <material:TextFieldPasswordShowHideAttachment />
+                        </material:TextField.Attachments>
+                    </material:TextField>
 
-                    <ActivityIndicator
-                        HorizontalOptions="Center"
-                        IsRunning="{Binding LoginCommand.IsRunning}"
-                        IsVisible="{Binding LoginCommand.IsRunning}"
-                        VerticalOptions="Center"
-                        Color="White" />
 
-                </Grid>
+                    <Grid Margin="0,15,0,0">
+
+                        <Button
+                            input:FormView.IsSubmitButton="True"
+                            BackgroundColor="#D95716"
+                            Command="{Binding LoginCommand}"
+                            CornerRadius="20"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="LOGIN">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding LoginCommand.IsRunning}"
+                                    TargetType="Button"
+                                    Value="True">
+                                    <Setter Property="Text" Value="" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+
+                        <ActivityIndicator
+                            HorizontalOptions="Center"
+                            IsRunning="{Binding LoginCommand.IsRunning}"
+                            IsVisible="{Binding LoginCommand.IsRunning}"
+                            VerticalOptions="Center"
+                            Color="White" />
+
+                    </Grid>
+
+                </input:FormView>
 
                 <Button
                     BackgroundColor="White"

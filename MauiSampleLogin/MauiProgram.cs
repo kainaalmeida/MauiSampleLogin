@@ -3,6 +3,10 @@ using MauiSampleLogin.Services.Restaurants;
 using Plugin.Fingerprint.Abstractions;
 using Plugin.Fingerprint;
 using UraniumUI;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 
 namespace MauiSampleLogin;
 
@@ -44,6 +48,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<RestaurantsPage>();
 
         builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
+
+        AppCenter.Start("android=82dcc988-a946-4c31-9beb-82b3b9ff00f0", typeof(Analytics), typeof(Crashes), typeof(Distribute));
 
         return builder.Build();
     }

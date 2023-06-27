@@ -56,6 +56,10 @@
 	  <PackageReference Include="Flunt" Version="2.0.5" />
 	  <PackageReference Include="Flurl" Version="3.0.7" />
 	  <PackageReference Include="Flurl.Http" Version="3.2.4" />
+	  <PackageReference Include="Microsoft.AppCenter" Version="5.0.2" />
+	  <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.2" />
+	  <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.2" />
+	  <PackageReference Include="Microsoft.AppCenter.Distribute" Version="5.0.2" />
 	  <PackageReference Include="MonkeyCache" Version="2.0.1" />
 	  <PackageReference Include="MonkeyCache.LiteDB" Version="2.0.1" />
 	  <PackageReference Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
